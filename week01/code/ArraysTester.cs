@@ -34,14 +34,17 @@ public static class ArraysTester {
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static List<double> MultiplesOf(double startingNum, int numMultiples)
 {
+    // Create a list to store the calculated multiples
     List<double> multiples = new List<double>();
 
+    // Calculate the multiples and add them to the list
     for (int i = 0; i < numMultiples; i++)
     {
         double currentMultiple = startingNum * (i + 1);
         multiples.Add(currentMultiple);
     }
 
+    // Return the list of multiples
     return multiples;
 }
     
@@ -53,14 +56,19 @@ public static class ArraysTester {
     /// <br /><br />
     /// Because a list is dynamic, this function will modify the existing <c>data</c> list rather than returning a new list.
     /// </summary>
-    public static List<T> RotateListRight<T>(List<T> list, int amount)
+    public static void RotateListRight<T>(List<T> list, int amount)
 {
+    // Calculate the effective rotation amount
     int rotateAmount = amount % list.Count;
-    List<T> rotatedList = new List<T>();
 
-    rotatedList.AddRange(list.GetRange(list.Count - rotateAmount, rotateAmount));
-    rotatedList.AddRange(list.GetRange(0, list.Count - rotateAmount));
+    // Create a temporary list to store the rotated elements
+    List<T> temp = new List<T>(list);
 
-    return rotatedList;
+    // Rotate the elements in the original list
+    for (int i = 0; i < list.Count; i++)
+    {
+        int newIndex = (i + rotateAmount) % list.Count;
+        list[newIndex] = temp[i];
+    }
 }
 }
